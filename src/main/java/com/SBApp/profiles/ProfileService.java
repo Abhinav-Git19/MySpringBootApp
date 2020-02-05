@@ -24,7 +24,7 @@ public class ProfileService {
 		return (List<Profile>) profileRepository.findAll();
 	}
 	public Profile getProfileById(int id){
-		return (Profile) profileRepository.findAllById(Collections.singleton(id));
+		return (Profile) profileRepository.findAllById(id);
 	}
 	public void addProfile(Profile p) {
 		profileRepository.save(p);

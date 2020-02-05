@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <title>MySpring</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Here is the list of profiles we have</h1>
+<ul th:each="profile: ${profiles}">
+    <a th:href="@{'/profile/' + ${profile.id}}">
+        <li th:text="${profile.name}"></li>
+    </a>
+
+</ul>
+</body>
+</html>

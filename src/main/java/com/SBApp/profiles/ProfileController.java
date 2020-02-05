@@ -1,11 +1,11 @@
 package com.SBApp.profiles;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class ProfileController {
 
 	@Autowired
@@ -13,20 +13,23 @@ public class ProfileController {
 	
 	//This is your getAllMethod
 	@RequestMapping("/profiles")
-	public List<Profile> getProfiles(){
-		return profileservice.getAllProfiles();	
+	public String getProfiles(Model model){
+		model.addAttribute("profiles",profileservice.getAllProfiles());
+		return "profiles";
 	}
 
 	//GetById
 	@RequestMapping("/profile/{id}")
-	public Profile getProfileById(@PathVariable int id){
-		return profileservice.getProfileById(id);
+	public String getProfileById(@PathVariable int id, Model model){
+		model.addAttribute("profile",profileservice.getProfileById(id));
+		return "profile";
 	}
 
-	@RequestMapping(method=RequestMethod.POST,value="/profile")
-	public void addProfile(@RequestBody Profile p) {
-		
+	@RequestMapping(method = RequestMethod.POST ,value="/profile")
+	public String addProfile(Profile p, Model model) {
 		profileservice.addProfile(p);
+		model.addAttribute("profile",profileservice.getAllProfiles());
+		return "profile";
 	}
 
 	@RequestMapping(method = RequestMethod.PUT,value="/profile")
